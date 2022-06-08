@@ -29,12 +29,13 @@ public class DisjointSet {
         int b = getGroup(y);
 
         if (a != b) {
-            if (this.rank[a] > this.rank[b]) {
-                this.set[b] = a;
-                this.rank[a]++;
-            } else {
+            if (this.rank[a] == this.rank[b]) {
                 this.set[a] = b;
                 this.rank[b]++;
+            } else if (this.rank[a] > this.rank[b]) {
+                this.set[b] = a;
+            } else {
+                this.set[a] = b;
             }
         }
     }
