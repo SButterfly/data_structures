@@ -6,11 +6,14 @@ package org.sbutterfly;
 public class DisjointSet {
 
     private final int[] set;
+    private final int[] rank;
 
     public DisjointSet(int n) {
         this.set = new int[n];
+        this.rank = new int[n];
         for (int i = 0; i < n;i++) {
             this.set[i] = i;
+            this.rank[i] = 1;
         }
     }
 
@@ -26,7 +29,13 @@ public class DisjointSet {
         int b = getGroup(y);
 
         if (a != b) {
-            this.set[a] = b;
+            if (this.rank[a] > this.rank[b]) {
+                this.set[b] = a;
+                this.rank[a]++;
+            } else {
+                this.set[a] = b;
+                this.rank[b]++;
+            }
         }
     }
 }
